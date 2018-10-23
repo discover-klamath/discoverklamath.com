@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        {% include 'layout/_head' %}
+        {% block meta %}{% endblock %}
+    </head>
+
+    {% if craft.request.getSegment(2) is not empty %}
+        {% set class = craft.request.getSegment(2) %}
+    {% elseif entry is defined %}
+        {% set class = entry.slug %}
+    {% endif %}
+
+    <body class="{{ class is defined ? class : null }}">
+        {% include 'layout/_header' %}
+        <main id="content" role="main">
+            {% block content %}{% endblock %}
+        </main>
+        {% include 'layout/_footer' %}
+    {% include 'layout/_scripts' %}
+    </body>
+</html>

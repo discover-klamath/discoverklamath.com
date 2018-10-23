@@ -1,0 +1,98 @@
+*
+  min-height: 0
+  min-width: 0
+
+body
+  @extend %telefon
+  font-size: 15px
+  background-color: $cream
+  background-image: url('../imgs/header_bg.jpg')
+  color: $grey
+  display: flex
+  min-height: 100vh
+  flex-direction: column
+
+  &.mobile-nav-open
+    overflow: hidden
+
+  main
+    flex: 1
+
+div.copy-block
+  text-align: left
+  padding-bottom: 2em
+  figure
+    position: relative
+    img
+      width: 100%
+
+  blockquote
+    @extend %garage
+    color: $brown
+    font-size: 25px
+    line-height: 1.1
+    margin-left: 1em
+    text-transform: uppercase
+
+  p
+    font-size: 16px
+
+    &.sm, &.meta
+      font-size: 11px
+
+    & > img
+      width: 100%
+      padding: 1em 14%
+
+    &.meta
+      font-size: 13px
+      margin-top: -.5em
+
+      &.md
+        font-size: 14px
+
+    &.excerpt-continue
+      text-align: right
+
+
+  h2
+    font-size: 42px
+    margin-top: 1em
+    margin-bottom: .3em
+
+  h3
+    color: $brown
+    font-size: 28px
+    margin-top: 1em
+
+  h4
+    font-size: 25px
+    margin-top: 2em
+
+  ul
+    margin-top: .75em
+    margin-left: 0
+    padding-left: 0
+
+    li
+      font-size: 16px
+      margin-left: 1em
+      margin-bottom: 1em
+      width: 75%
+
+.sidebar
+  h3
+    color: $brown
+    margin-top: 0
+
+  p.newsletter-thank-you
+    @include retina-bg('critters', 'png', 191px, 2052px)
+    background-repeat: no-repeat
+    background-position: 30px -512px
+    color: $blue
+    line-height: 1.3
+    font-size: 17px
+    padding-bottom: 220px
+
+.mb-5
+  margin-bottom: 3rem

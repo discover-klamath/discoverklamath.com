@@ -1,0 +1,75 @@
+{% extends "_layout" %}
+
+{% block meta %}
+    {% set img = 0 %}
+    {% set desc = 0 %}
+    {% for block in entry.sections %}
+        {% switch block.type.handle %}
+        {% case 'marquee' %}
+            {% if img == 0 %}
+                <meta property="og:image"
+                      content="{{ block.marquee.first.url }}"/>
+                <meta property="og:image:secure_url"
+                      content="{{ block.marquee.first.url }}"/>
+                {% set img = 1 %}
+            {% endif %}
+        {% case 'text' %}
+            {% if desc == 0 %}
+                <meta property="description" content="{{ block.text | striptags }}">
+                <meta property="og:description"
+                      content="{{ block.text | striptags }}">
+                <meta property="twitter:description"
+                      content="{{ block.text | striptags }}">
+                {% set desc = 1 %}
+            {% endif %}
+        {% endswitch %}
+    {% endfor %}
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Meet me in Klamath | {{ entry.title }}">
+    <meta property="og:url" content="{{ craft.request.url }}">
+    <meta property="og:site_name"
+          content="Meet Me In Klamath | {{ entry.title }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Meet Me In Klamath | {{ entry.title }}">
+{% endblock %}
+
+{% block content %}
+    {% cache %}
+
+        {% if entry.storyTrackingSnippit | length %}
+            {{ entry.storyTrackingSnippit | raw }}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-xs-12">
+                {% for block in entry.sections %}
+
+                    {% switch block.type.handle %}
+                    {% case 'marquee' %}
+                        {% include 'stories/sections/_marqueeImage' with {'block': block} %}
+                    {% case 'text' %}
+                        {% include 'stories/sections/_text' with {'block': block} %}
+                    {% case 'heading' %}
+                        {% include 'stories/sections/_heading' with {'block': block} %}
+                    {% case 'imageText' %}
+                        {% include 'stories/sections/_split_text' with {'block': block} %}
+                    {% case 'image' %}
+                        {% include 'stories/sections/_image' with {'block': block} %}
+                    {% case 'quote' %}
+                        {% include 'stories/sections/_quote' with {'block': block} %}
+                    {% endswitch %}
+
+                {% endfor %}
+            </div>
+
+            {#<div class="col-xs-12 col-md-3 sidebar">#}
+            {#{% if entry.advertisements | length %}#}
+            {#<div class="row">#}
+            {#{% include 'partials/advertisements' with {'type': 'vertical'} %}#}
+            {#</div>#}
+            {#{% endif %}#}
+            {#</div>#}
+        </div>
+    {% endcache %}
+{% endblock %}

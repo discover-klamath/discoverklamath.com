@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+
+            {% include 'partials/marquee' with {'type': 'landing'} %}
+
+            {% include 'partials/jack_rabbit.twig' with {'isHomepage': craft.request.getSegment(1) == ''} %}
+
+            {% if craft.request.getSegment(1) == 'order-guide' %}
+
+                {% include 'partials/order_guide' %}
+
+            {% else %}
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-9 copy-block">
+                        <h2>{{ entry.title }}</h2>
+
+                        {% if craft.request.getSegment(2) == 'event-calendar' %}
+
+                            {# event calendar #}
+
+                            {{ entry.body }}
+                            {% include 'events/event_calendar' %}
+
+                        {% elseif  (craft.request.getSegment(1) == 'eat-and-drink') %}
+
+                            {% include 'directories/eat-and-drink.twig' %}
+
+                        {% elseif ((craft.request.getSegment(2) == 'shopping' and craft.request.segments|length > 2) or
+                            (craft.request.getSegment(1) == 'lodging' and craft.request.segments|length > 1)) %}
+
+                            {# directory pages #}
+
+                            {% include 'directories/index.twig' with { 'category': craft.request.lastSegment } %}
+
+                        {% elseif craft.request.getSegment(2) == 'news-and-features' %}
+
+                            {% include 'news-and-features/index.twig' %}
+
+                        {% elseif craft.request.getSegment(1) == 'klamathcritters'
+                            and craft.request.getSegment(2) != 'contest-rules'
+                            and craft.request.getSegment(2) != 'privacy-policy' %}
+
+                            {% include 'passport/index.twig' with {'entry': entry } %}
+
+                        {% else %}
+
+                            {# normal page #}
+
+                            {{ entry.body }}
+
+                        {% endif %}
+
+                        {% include 'partials/content_list' %}
+
+                        {% include 'partials/image_grid' %}
+
+                        {% include 'partials/tabbed_list' %}
+
+                        {% if entry.type == 'imageGallery' %}
+                            {% include 'partials/image_gallery' with {'entry':entry} %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-xs-12 col-md-3 sidebar">
+                        {% include 'partials/advertisements' with {'type': 'vertical'} %}
+                    </div>
+                </div>
+
+                {% if entry.advertisements|length %}
+                    <div class="row">
+                        {% include 'partials/advertisements' with {'type': 'horizontal'} %}
+                    </div>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>

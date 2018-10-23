@@ -1,0 +1,18 @@
+{% cache globally %}
+
+{% set category = craft.categories.group('navigationTypes').title('Footer').first() %}
+{% set pages = craft.entries.section('pages').relatedTo(category) %}
+<nav>
+    <ul class="footer-nav" class="hidden-sm-down">
+        <li>
+            <a href="/" title="Meet Me in Klamath Home">Home</a>
+        </li>
+        {% nav page in pages %}
+            <li>
+                {{ page.getLink() }}
+            </li>
+        {% endnav %}
+    </ul>
+</nav>
+
+{% endcache %}

@@ -1,0 +1,18 @@
+<section class="heading-section container mb-5">
+    {% switch block.headingType %}
+        {% case 'h1' %}
+            <h1>{{ block.heading }}</h1>
+        {% case 'h2' %}
+            <h2>{{ block.heading }}</h2>
+        {% case 'h3' %}
+            <h3>{{ block.heading }}</h3>
+        {% case 'h4' %}
+            <h4>{{ block.heading }}</h4>
+        {% case 'h5' %}
+            <h5>{{ block.heading }}</h5>
+        {% case 'h6' %}
+            <h6>{{ block.heading }}</h6>
+        {% default %}
+            <h2>{{ block.heading }}</h2>
+    {% endswitch %}
+</section>

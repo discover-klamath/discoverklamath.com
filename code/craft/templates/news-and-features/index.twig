@@ -1,0 +1,33 @@
+{% paginate craft.entries.section('newsAndFeatures').limit(8) as pageInfo, pageEntries %}
+
+{% block content %}
+
+{% for entry in pageEntries %}
+
+  <div class="row">
+    <div class="col-xs-12 col-md-9 copy-block">
+      <h3><a href="news-and-features/{{ entry.slug }}">{{ entry.title }}</a></h3>
+      <p class="meta">Posted on {{ entry.postDate|date('F d, Y')}}</p>
+
+      {{ entry.excerpt }}
+
+      <p class="excerpt-continue"><a href="/trip-ideas/news-and-features/{{ entry.slug }}">Continue Reading »</a></p>
+
+    </div>
+
+  </div>
+
+
+
+{% endfor %}
+  {% if entry.advertisements|length %}
+    <div class="row">
+      {% include 'partials/advertisements' with {'type': 'horizontal'} %}
+    </div>
+  {% endif %}
+{% endblock %}
+
+<div class="page-nav" id="main">
+  {% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}" class="btn btn-primary arrow prev"><span>‹</span>Previous</a>{% endif %}
+  {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}" class="btn btn-primary arrow next">Next<span>›</span></a>{% endif %}
+</div>

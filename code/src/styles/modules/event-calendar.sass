@@ -1,0 +1,173 @@
+.table-box, table
+  width: 100%
+
+table
+  border-spacing: 0
+
+  th, td
+    border: 1px solid #ccc
+    border-collapse: collapse
+    text-align: center
+    padding: .5em
+
+  th
+    background-color: $red
+    color: $lt-cream
+    width: 14.285%
+
+  td
+    background-color: rgba(255, 255, 255, .4)
+    height: 50px
+
+    a
+      display: block
+      margin-top: .6em
+      margin-bottom: -.5em !important
+
+      span
+        display: none
+
+    em
+      font-style: normal
+
+    &.today
+      a
+        color: $red !important
+
+      ul li a
+        color: $blue !important
+
+      &.no-events
+        a
+          opacity: 1
+
+    &.no-events
+      a
+        pointer-events: none
+        opacity: .5
+
+    &.has-events
+      a
+        margin-top: -.3em
+
+        em
+          font-size: 120%
+
+      ul
+        display: none
+
+  .tri
+    display: none
+
+body.event-calendar
+  .copy-block
+    h4
+      margin-top: .6em
+
+
+@include media-breakpoint-up(md)
+  table
+    th, td
+    th
+      width: 14.285%
+
+      .tri
+        display: block
+
+      .single
+        display: none
+    td
+      height: 100px
+      text-align: left
+      padding-left: 5px
+      padding-top: 5px
+      vertical-align: top
+
+      a
+        padding-top: .4em
+
+      &.today
+        a
+          span
+            display: inline-block
+
+      &.no-events
+        em
+          opacity: .75
+
+      &.has-events
+        ul
+          display: block
+
+      em
+        float: right
+        font-size: 16px
+
+      ul
+        list-style: none
+        margin-top: .25em
+        padding: 0
+
+        li
+          line-height: 1
+          margin: .5em 0 0 .5em !important
+          padding: 0
+
+          a
+            font-size: 14px
+            // line-height: 1.1
+
+div.month-nav#main, div.page-nav#main
+  @extend %garage
+  letter-spacing: 0.05em
+  padding-top: 1em
+  padding-bottom: 1em
+  text-align: center
+  text-transform: uppercase
+
+  .middle
+    font-size: 21px
+    display: inline-block
+    margin: 0 auto
+    padding-top: .3em
+
+  a.btn.btn-primary.prev.arrow, a.btn.btn-primary.next.arrow
+    background: $blue
+    border: none
+    color: $lt-cream
+    font-size: 18px
+    padding-top: .2em
+    padding-bottom: .1em
+
+    &:hover
+      background: $red
+      text-decoration: none
+
+    span
+      display: inline-block
+      font-size: 180%
+      height: 34px !important
+      margin-top: -1em
+      overflow: hidden
+
+    &.prev
+      float: left
+
+      span
+        margin-right: .3em
+
+    &.next
+      float: right
+      span
+        margin-left: .3em
+
+@include media-breakpoint-up(md)
+  div.month-nav#main
+    .middle
+      font-size: 27px
+      padding-top: .1em
+
+  body.event-calendar
+    #content .container-fluid
+      min-height: 1000px
+

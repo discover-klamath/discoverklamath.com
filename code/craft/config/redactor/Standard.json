@@ -1,0 +1,4 @@
+{
+	"buttons": ["source","format","bold","italic","lists","link","file","image","horizontalrule"],
+	"plugins": ["source","fullscreen"]
+}

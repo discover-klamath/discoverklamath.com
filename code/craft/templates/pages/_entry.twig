@@ -1,0 +1,16 @@
+{% extends "_layout" %}
+
+{% block content %}
+    {% cache %}
+        {% switch entry.type %}
+            {% case 'story' %}
+                {% include 'pages/entry_types/_sections' with {'entry': entry} %}
+            {% case 'eventSubmission' %}
+                {% include 'pages/entry_types/_event_submission' with {'entry': entry} %}
+            {% case 'blog' %}
+                {% include 'pages/entry_types/_blog' with {'entry': entry} %}
+            {% default %}
+                {% include 'pages/entry_types/_default' with {'entry': entry} %}
+        {% endswitch %}
+    {% endcache %}
+{% endblock %}

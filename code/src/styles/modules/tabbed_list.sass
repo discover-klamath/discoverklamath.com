@@ -1,0 +1,105 @@
+.tab-list
+  position: relative
+  min-height: 1000px
+
+  .tab-heading
+    @extend %garage
+    color: $grey
+    cursor: pointer
+    display: block
+    font-size: 19px
+    left: 40px
+    letter-spacing: 0.05em
+    padding-bottom: 0em
+    padding-left: .2em
+    padding-right: .2em
+    position: absolute
+    text-transform: uppercase
+    top: 0
+
+    &.active
+      @include retina-bg('pole_horiz', 'png', 78px, 13px)
+      background-position: bottom left
+      background-repeat: repeat-x
+      color: $green
+
+    &:hover
+      @include retina-bg('pole_horiz', 'png', 78px, 13px)
+      background-position: bottom left
+      background-repeat: repeat-x
+      color: $red
+
+    &.index-2
+      margin-top: 1.5em
+
+    &.index-3
+      margin-top: 3em
+
+    &.index-4
+      margin-top: 4.5em
+
+  &.heading-count-2
+    .tab-copy
+      margin-top: 5em
+
+  &.heading-count-3
+    .tab-copy
+      margin-top: 7em
+
+  &.heading-count-4
+    .tab-copy
+      margin-top: 9em
+
+  @media (min-width: 62em)            // CUSTOM BREAKPOINT
+    .tab-heading
+      display: inline-block
+      font-size: 21px
+      padding-bottom: .2em
+      padding-left: .2em
+      padding-right: .2em
+
+    .tab-heading.index-1
+      left: auto
+
+    &.heading-count-4
+      .tab-copy
+        margin-top: 3.5em
+
+    .tab-heading.index-1,
+    .tab-heading.index-2,
+    .tab-heading.index-3,
+    .tab-heading.index-4
+      margin-top: auto
+
+    .tab-heading.index-2
+      left: 25%
+
+    .tab-heading.index-3
+      left: 50%
+
+    .tab-heading.index-4
+      left: 75%
+
+  .tab-copy
+    margin-top: 4em
+    opacity: 0
+    pointer-events: none
+    position: absolute
+    top: 0
+    transition: opacity 0.2s ease-out
+
+    ul
+      list-style: none
+      margin-left: 30px
+      padding-left: 0
+
+      li
+        margin-left: 0
+        padding-left: 0
+
+    &.vis
+      opacity: 1
+      pointer-events: all
+
+
+

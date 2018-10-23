@@ -1,0 +1,90 @@
+#footer
+  .row
+    .col-xs-12
+      background-color: $blue
+      padding-bottom: 5em
+      position: relative
+      text-align: center
+
+      &.dark
+        background-color: $grey
+
+      p.sm
+        bottom: 0
+        color: $cream
+        font-size: 12px
+        position: absolute
+
+      ul.footer-nav
+        font-size: 19px
+        letter-spacing: .07em
+        margin: 1em 0 0 0
+        padding: 0
+
+        li
+          margin-left: 1em
+
+          &:first-child
+            margin-left: 0
+
+          a, a:visited
+            color: $lt-cream
+
+          a:hover, a:active
+            color: $red
+
+      .supplemental-nav
+        float: none
+        margin-top: 1em
+        padding-left: 0
+
+        .klam-btn.dark a 
+          color: $red !important
+
+          &:hover
+            color: $lt-cream !important
+
+.hashtag-footer
+  font-family: Telefon !important
+  margin-top: 0.5rem !important
+  color: #a83a23 !important
+  font-size: 1.3rem !important
+
+nav
+  .hashtag-footer
+    text-align: right
+
+
+@include media-breakpoint-down(sm)
+  #footer
+    height: 220px
+
+    .supplemental-nav
+      .klam-btn
+        display: block
+        margin-bottom: 1.8em
+
+      li
+        margin: auto .5em
+
+      .hashtag-footer
+        text-align: center
+
+@include media-breakpoint-up(md)
+  #footer
+    .row
+      .col-xs-12
+        text-align: left
+        height: 110px
+        margin-bottom: -22px
+
+        ul.footer-nav
+          margin: 1em 0 0 0
+
+        .supplemental-nav
+          li
+            margin: auto .2em
+
+          .hashtag-footer
+            text-align: right
+

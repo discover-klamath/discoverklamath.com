@@ -1,0 +1,323 @@
+header#header
+  @include retina-bg('pole_horiz', 'png', 175px, 13px)
+  background-position: bottom left
+  background-repeat: repeat-x
+  position: relative
+
+  @include media-breakpoint-up(md)
+    height: 160px
+
+nav
+  ul
+    letter-spacing: .06em
+    list-style: none
+    text-transform: uppercase
+
+    li
+      @extend %garage
+      display: inline-block
+
+      a:active, a:hover
+        text-decoration: none
+
+      ul li
+        @extend %telefon
+        font-size: .9em
+        text-transform: none
+
+
+  #burger
+    @include retina-bg('burger', 'png', 40px, 30px)
+    cursor: pointer
+    height: 30px
+    position: fixed
+    right: 2em
+    top: 2.5em
+    width: 40px
+    z-index: $burger-index
+
+    #mobile-nav-wrap.vis
+      pointer-events: none
+
+  #burger-close
+    @include retina-bg('burger_close', 'png', 31px, 35px)
+    cursor: pointer
+    display: none
+    height: 35px
+    position: fixed
+    right: 2.4em
+    top: 2.5em
+    width: 31px
+    z-index: $close-btn-index
+
+    &.open-face
+      display: block
+
+
+  ul#main-nav
+    background-color: rgba(255, 255, 255, 0.0)
+    background-position: bottom left
+    background-repeat: repeat-x
+    display: none
+    margin: -50px 0 0 -20px
+    padding-bottom: .35em
+    padding-top: .65em
+    font-size: 16px
+    @media(min-width: 800px)
+      font-size: 24px
+
+    & > li > ul > div
+      background: transparent url('../imgs/mobile_nav_bg.jpg') 0 0
+      background-size: cover
+      padding: 15px 20px 12px 20px
+      transform: translateY(-400px)
+      transition: transform 0.2s cubic-bezier(.16,.82,.71,.98)
+
+      &.vis
+        transform: translateY(0)
+
+    & > li:hover
+      & > ul > div
+        transform: translateY(0)
+
+        &:after // prevent sub-nav from collapsing if sub-sub-nav exists and is last
+          content: '-'
+          font-size: 0.1em
+          position: static
+          display: block
+
+      & ul
+        pointer-events: all
+
+    header#header.fixed &
+      @include retina-bg('pole_horiz_with_texture', 'png', 89px, 60px)
+      background-position: bottom left
+      background-repeat: repeat-x
+      font-size: 18px
+      margin-left: 0
+      margin-top: 0
+      padding-bottom: .5em
+      padding-left: 64px
+      padding-top: .75em
+      position: fixed
+      top: 0
+      width: 100%
+      z-index: $main-nav-fixed-index
+
+    @include media-breakpoint-up(md)
+      &
+        display: block
+        font-size: 22px
+
+    li
+      margin-left: .9em
+
+      &.mini-home
+        margin: 0
+        display: none
+
+        header#header.fixed &
+          display: block
+
+          a
+            @include retina-bg('logo_no_flag', 'png', 50px, 37px)
+            height: 0
+            left: 15px
+            overflow: hidden
+            padding-top: 37px
+            position: absolute
+            top: 6px
+            width: 50px
+
+      a, a:visited
+        color: $blue
+
+      a:active, a:hover
+        color: $red
+
+      & ul
+        position: absolute
+        margin-left: -60px
+        overflow: hidden
+        padding-top: 2px
+        pointer-events: none
+        z-index: 1000
+
+        li
+          clear: both
+          display: block
+          margin: 0
+          padding: 0
+
+          a, a:visited
+            color: #fff
+            display: table-cell
+
+            &:active, &:hover
+              color: $red
+
+          ul
+            position: static
+            background-color: transparent
+            background-image: none
+            float: left
+            margin-top: 0
+            margin-left: 2em
+            padding: 0
+
+          &.columns-2
+            ul
+              column-count: 2
+              column-gap: 10px
+          &.columns-3
+            ul
+              column-count: 3
+              column-gap: 10px
+
+
+  nav ul.supplemental-nav
+
+    .klam-btn a 
+      background-color: $red !important
+
+      &:hover
+        color: $lt-cream !important
+        background-color: $blue !important
+
+  ul.supplemental-nav
+    header#header &
+      display: none
+
+      @include media-breakpoint-up(md)
+        display: block
+
+    footer &
+      float: right
+      margin-bottom: 0
+
+    @include media-breakpoint-up(md)
+      bottom: auto
+      display: block
+      position: absolute
+      right: 2em
+      top: 1em
+      z-index: auto
+      // TODO show only with mobile nav
+
+    li
+      a
+        display: inline-block
+        font-size: 19px
+        margin: 0 1.5em
+        padding-top: .15em
+        vertical-align: middle
+
+  #mobile-nav-wrap
+    background-color: $blue-trans
+    height: 0
+    transition: background-color 0.3s
+
+    &.vis
+      background: transparent url('../imgs/mobile_nav_bg.jpg') 0 0
+      background-size: cover
+      overflow-y: scroll
+      min-height: 100%
+      position: fixed
+      top: 0
+      width: 100%
+      z-index: $mobile-nav-bg-index
+
+      .inner-wrap
+        @include retina-bg('klamath_logo_mobile_nav', 'png', 220px, 2500px)
+        background-position: 40px 20px
+        background-repeat: no-repeat
+        // border: 4px solid $grey // neat but probably not
+        min-height: 100%
+        padding-top: 1px
+        width: 100%
+
+        .supplemental-nav
+          display: none
+
+      ul#main-nav
+        background-image: none
+        background-color: rgba(255, 255, 255, 0.0)
+        display: block
+        font-size: 37px
+        // left: 20px
+        line-height: 1
+        // margin: 0
+        padding-bottom: auto
+        padding-top: auto
+        position: absolute
+
+        & > li > ul > div
+          display: none
+
+        li
+          padding-top: 0.5em
+
+          &.mini-home
+            margin-left: .9em
+            display: block
+
+            a
+              position: static
+
+header#header.fixed
+  ul > li > ul
+    padding-top: 7px
+
+.critter:first-of-type
+  display: none
+  top: 35px
+  right: 20px
+
+  & + .critter
+    display: none
+    top: 35px
+    right: 150px
+
+    & + .critter
+      display: none
+      top: 35px
+      right: 280px
+
+@media (min-width: 53em)
+  .critter:first-of-type
+    display: block
+
+    @media (min-width: 60em)
+      & + .critter
+        display: block
+
+        @media (min-width: 68em)
+          & + .critter
+            display: block
+
+#mobile-nav-wrap.vis
+  .critter
+    display: none
+
+body.mobile-nav-open // mobile modal open
+  nav
+    ul#main-nav
+      overflow-y: scroll
+      position: absolute
+      left: 50%
+      margin-left: -165px
+      padding-left: 0
+      text-align: center
+      width: 300px
+      // vertical-align middle of the unknown
+      position: relative !important
+      top: 50%
+      transform: translateY(36%);
+
+      li
+        a, a:visited
+          color: $lt-cream
+
+          &:hover
+            color: $red
+

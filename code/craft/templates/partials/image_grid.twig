@@ -1,0 +1,103 @@
+{% set imageGridEntries = entry.imageGridEntry %}
+{% set firstBlockType = '' %}
+{% set gridItemLink = '' %}
+{% set external = '' %}
+{% if imageGridEntries|length %}
+  <div class="row image-grid">
+  {% for gridEntry in imageGridEntries %}
+      {% for gridBlock in gridEntry.imageGrid %}
+      {% set nextBlock = gridBlock.getNext() %}
+        {% if gridBlock.type == "image" %}
+        {% if firstBlockType is empty %}
+          {% set firstBlockType = 'image' %}
+          <div class="grid-item adj col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-{{ gridEntry.maxGridColumns }}{% if nextBlock and nextBlock.type != 'image' %} enhanced{% endif %}">
+        {% elseif firstBlockType == "image" %}
+          <div class="grid-item adj col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-{{ gridEntry.maxGridColumns }}{% if nextBlock and nextBlock.type != 'image' %} enhanced{% endif %}">
+        {% endif %}
+
+          {% set gridImage = gridBlock.gridImage.first() %}
+          {% set external = false %}
+          {% if gridBlock.entryLink.first() is not null %}{% set gridItemLink = gridBlock.entryLink.first().url %}{% elseif gridBlock.externalUrl is not null %}{% set external = true %}{% set gridItemLink = gridBlock.externalUrl %}{% endif %}
+          {% if gridBlock.entryLink.first() is not null %}{% set gridItemLinkName = gridBlock.entryLink.first().title %}{% elseif gridBlock.externalLinkName is not null %}{% set gridItemLinkName = gridBlock.externalLinkName %}{% endif %}
+          <a class="image-grid-link responsive"{% if gridItemLink is empty %}{% else %} href="{{ gridItemLink }}"{% endif %} style="background-image: url('{{ gridImage.getUrl('fourByThree') }}');"{% if external %} target="_blank"{% endif %}>
+            {% if gridItemLinkName is not empty %}<h3 class="link-text adj">{{ gridItemLinkName }}</h3>{% endif %}
+          </a>
+
+          {% if nextBlock %}
+            {% set alreadyClosed = false %}
+            {% if gridBlock.getNext().type == firstBlockType %}
+              {% set alreadyClosed = true %}
+              </div>
+            {% endif %}
+          {% endif %}
+
+        {% elseif gridBlock.type == "address" %}
+
+          {% if firstBlockType is empty %}
+            {% set firstBlockType = 'address' %}
+            <div class="grid-item adj col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-{{ gridEntry.maxGridColumns }}{% if nextBlock and nextBlock.type != 'image' %} enhanced{% endif %}">
+          {% elseif firstBlockType == "address" %}
+            <div class="grid-item adj col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-{{ gridEntry.maxGridColumns }}{% if nextBlock and nextBlock.type != 'image' %} enhanced{% endif %}">
+          {% endif %}
+
+            {% if gridItemLink is empty %}
+              <div class='grid-name-item'>
+                <h4 class="no-link address-name">{{ gridBlock.gridNameField }}</h4>
+              </div>
+            {% else %}
+            <a class="grid-name-link" href="{{ gridItemLink }}"{% if external %} target="_blank"{% endif %}>
+                <h4 class="address-name">{{ gridBlock.gridNameField }}</h4>
+              </a>
+            {% endif %}
+            <p class="address">
+              {{ gridBlock.addressField }}
+              <span class="phone">{{ gridBlock.phoneField }}</span>
+            </p>
+
+            {% if nextBlock %}
+              {% set alreadyClosed = false %}
+              {% if gridBlock.getNext().type == firstBlockType %}
+                {% set alreadyClosed = true %}
+                </div>
+              {% endif %}
+            {% endif %}
+
+        {% elseif gridBlock.type == "info" %}
+          {% if firstBlockType is empty %}
+            <div class="grid-item adj col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-{{ gridEntry.maxGridColumns }}{% if nextBlock and nextBlock.type != 'image' %} enhanced{% endif %}">
+            {% set firstBlockType = 'info' %}
+          {% elseif firstBlockType == "info" %}
+            <div class="grid-item adj col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-{{ gridEntry.maxGridColumns }}{% if (nextBlock and nextBlock.type != 'image') or (firstBlockType == "info") %} enhanced{% endif %}">
+          {% endif %}
+          <div class="copy-block">
+            {{ gridBlock.copyField }}
+          </div>
+          <p class="hours">{{ gridBlock.hoursField }}</p>
+
+          {% if nextBlock %}
+            {% set alreadyClosed = false %}
+            {% if gridBlock.getNext().type == firstBlockType %}
+              {% set alreadyClosed = true %}
+              </div>
+            {% endif %}
+          {% endif %}
+
+
+        {% endif %}
+
+        {# after all types close div #}
+        {% if nextBlock %}
+          {% if nextBlock.type == "image" %}
+            {% if not alreadyClosed %}
+              </div>
+            {% endif %}
+          {% endif %}
+        {% else %}
+          </div>
+        {% endif %}
+        {# sheesh, must be a better way #}
+
+      {% endfor %}
+  {% endfor %}
+  </div>
+{% endif %}

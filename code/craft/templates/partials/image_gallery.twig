@@ -1,0 +1,13 @@
+<div class="row">
+    {% set galleryGroups = entry.gallery.galleryGroups %}
+
+    {% for group in galleryGroups %}
+        <a href="/photo-gallery/{{ group.slug }}" class="col-xs-12 col-md-4">
+            <img src="{{ group.photos.first.photo.first.getUrl('fourByThree') }}"
+                 style="width:100%;">
+            <h3>{{ group.title }}</h3>
+            <p>{{ group.description }}</p>
+        </a>
+    {% endfor %}
+
+</div>

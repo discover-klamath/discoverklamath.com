@@ -1,0 +1,23 @@
+{% extends (craft.request.isAjax and not craft.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12 col-md-9 copy-block">
+            <h2>{{ entry.title }}</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for photo in entry.photos %}
+            <a href="{{ photo.photo.first.url }}" class="col-xs-12 col-md-4">
+                <img src="{{ photo.photo.first.getUrl('fourByThree') }}"
+                     style="width:100%;"/>
+                <h3 style="margin-top:20px;">{{ photo.title }}</h3>
+                <p>Credit: {{ photo.credit }}</p>
+                <p>Description: {{ photo.description }}</p>
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock %}

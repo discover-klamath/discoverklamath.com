@@ -1,0 +1,23 @@
+{% extends '_layouts/elementindex' %}
+{% set title = 'Submissions'|t %}
+{% set offset = 4 %}
+{% set elementType = 'Formerly_Submission' %}
+
+{% includeCssResource('formerly/formerly.css') %}
+
+{% set tabs = {
+	submissions: { label: 'Submissions'|t, url: url('formerly') },
+	forms:       { label: 'Forms'|t, url: url('formerly/forms') },
+	export:      { label: 'Export'|t, url: url('formerly/export') }
+} %}
+
+{% includeJsResource 'formerly/formerly.js' %}
+
+{% block initJs %}
+	{{ parent() }}
+
+	{% if craft.request.getParam('sourceKey') %}
+		Craft.elementIndex.selectSource($('a[data-key="{{  craft.request.getParam('sourceKey') }}"]'));
+		Craft.elementIndex.updateElements();
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% set blogPosts = craft.entries.section('travelBlog').limit(5) %}
+
+{% macro blogRow(entry) %}
+    <a class="image-grid-link responsive w-100" href="{{ entry.url }}" style="background-image: url('{{ entry.photo.first.url }}');">
+        <h3 class="link-text adj">{{ entry.title }}</h3>
+    </a>
+{% endmacro %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            {% include 'partials/marquee' with {'type': 'landing'} %}
+            {% include 'partials/jack_rabbit.twig' with {'isHomepage': craft.request.getSegment(1) == ''} %}
+            <div class="row">
+                <div class="col-xs-12 col-md-9 copy-block">
+                    <h2>{{ entry.title }}</h2>
+                    <p>{{ entry.body }}</p>
+                    <div class="row image-grid">
+                        {% for blogEntry in blogPosts %}
+                            <div class="col-xs-12 grid-item adj col-xs-12 col-sm-6 col-md-4">
+                                {{ _self.blogRow(blogEntry) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

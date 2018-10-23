@@ -1,0 +1,42 @@
+{% set cat = craft.categories.slug(category).first() %}
+
+{% if craft.request.getSegment(1) == 'things-to-do' %}
+    {% paginate craft.entries.section('shopping').relatedTo(cat).order('title').limit(12) as pageInfo, pageEntries %}
+{% elseif craft.request.getSegment(1) == 'lodging' %}
+    {% paginate craft.entries.section('lodging').relatedTo(cat).order('title').limit(12) as pageInfo, pageEntries %}
+{% elseif craft.request.getSegment(1) == 'eat-and-drink' %}
+    {% paginate craft.entries.section('dining').order('title').limit(12) as pageInfo, pageEntries %}
+{% endif %}
+
+{% block content %}
+
+    <div class="row">
+        {% for entry in pageEntries %}
+            <div class="col-xs-12 col-md-3 copy-block">
+                <h4><a href="{{ entry.website }}">{{ entry.title }}</a></h2>
+
+                    <p class="address">
+                        {{ entry.address }}
+                    </p>
+
+                    <p class="phone">
+                        <span>{{ entry.phone }}</span>
+                    </p>
+
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+<div class="page-nav" id="main">
+    {% if pageInfo.prevUrl %}
+        <a href="{{ pageInfo.prevUrl }}" class="btn btn-primary arrow prev">
+            <span>‹</span>Previous</a>
+    {% endif %}
+    {% if pageInfo.nextUrl %}
+        <a href="{{ pageInfo.nextUrl }}" class="btn btn-primary arrow next">
+            Next<span>›</span>
+        </a>
+    {% endif %}
+</div>

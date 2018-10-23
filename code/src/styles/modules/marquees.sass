@@ -1,0 +1,114 @@
+.slick-slider
+  margin-left: -15px
+  margin-right: -15px
+
+  &.home
+    height: 624px
+
+    .video-wrap
+      background-size: cover;
+      background-position: center;
+
+  .slick-list, .slick-track
+    height: 100%
+
+  .slick-slide
+    background-color: transparent
+    background-position: center center
+    background-size: cover
+    height: 100%
+
+    > div, > div > div, img
+      height: 100%
+      background-size: cover
+      width: 100%;
+
+  .slick-arrow
+    @extend %garage
+    background-color: transparent
+    border: none
+    color: $lt-cream
+    font-size: 100px
+    padding: 0
+    position: absolute
+    text-shadow: 1px 1px 2px rgba(50, 50, 50, 0.5)
+    top: 50%
+    transform: translateY(-64%)
+    -webkit-appearance: caret
+
+    &:hover, &:active
+      color: $red
+
+    &.slick-next
+      right: 20px
+
+    &.slick-prev
+      left: 20px
+      z-index: $prev-arrow-index
+
+    @include media-breakpoint-up(sm)
+      font-size: 130px
+
+      &.slick-next
+        right: 40px
+
+      &.slick-prev
+        left: 40px
+
+    @include media-breakpoint-up(md)
+      font-size: 160px
+
+  .play-btn
+    @include retina-bg('play_button', 'png', 150px, 150px)
+    background-color: transparent
+    border: none
+    height: 150px
+    opacity: 0.4
+    position: absolute
+    left: 50%
+    top: 50%
+    margin-left: -75px
+    margin-top: -75px
+    width: 150px
+    z-index: 9999
+
+  .marquee-player
+    display: none
+    height: 100%
+    width: 100%
+
+  h3
+    display: none
+    bottom: 90px
+    color: $lt-cream
+    font-size: 50px
+    letter-spacing: .03em
+    line-height: 1
+    margin-left: 70px
+    margin-right: 70px
+    position: absolute
+
+    @include media-breakpoint-up(sm)
+      font-size: 50px
+      margin-left: 90px
+
+  &.homepage
+    .slick-slide
+      height: 70vh
+
+
+#marquee-captions
+  p.caption
+    opacity: 0
+    transition: opacity 0.2s linear
+    margin-top: 1em
+    position: absolute
+    right: 20px
+
+    &.vis
+      opacity: 1
+
+@include media-breakpoint-up(md)
+  #marquee-captions
+    p.caption
+      right: 50px

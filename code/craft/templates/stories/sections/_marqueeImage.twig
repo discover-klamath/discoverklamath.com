@@ -1,0 +1,3 @@
+{% if block.marquee | length %}
+    <section class="marquee-section mb-5" style="background-image: url({{ block.marquee.first.getUrl('sixteenByNine') }})"></section>
+{% endif %}

@@ -1,0 +1,148 @@
+<div class="row">
+  <div class="col-xs-12 col-md-9 copy-block">
+    <h2>{{ entry.title }}</h2>
+    {{ entry.body }}
+
+    {% macro errorList(errors) %}
+    {% if errors %}
+    <ul class="errors">
+      {% for error in errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endmacro %}
+
+    {% from _self import errorList %}
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+  {% if craft.request.getParam('message') == 'thank-you' %}
+  <h4 class="guide-thank-you">
+      Thanks For Ordering Our Guide. It'll Wing Its Way To You Very Soon!
+  </h4>
+  <div class="owl"></div>
+  {% else %}
+      <form method="post" action="" id="order-guide-form" accept-charset="UTF-8">
+        {{ getCsrfInput() }}
+        <input type="hidden" name="action" value="contactForm/sendMessage">
+        <input type="hidden" name="redirect" value="/order-guide/?message=thank-you">
+        <input type="hidden" name="subject" value="Guide Request">
+        <input type="hidden" name="message[Name]" id="name-dup" value="">
+
+        <h4>My Information</h4>
+        <div class="form-group row">
+          <label for="inputName" class="col-xs-12 col-sm-3 form-control-label">Your Name<sup>*</sup></label>
+          <div class="col-xs-12 col-sm-9">
+            <input type="text" class="form-control" id="name-field" name="fromName" placeholder="Your Name" value="{% if message is defined %}{{ message.fromName }}{% endif %}">
+            <ul class="errors"><li id="name-error">Your name cannot be blank</li></ul>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-xs-12 col-sm-3 form-control-label">Email<sup>*</sup></label>
+          <div class="col-xs-12 col-sm-9">
+            <input type="email" class="form-control" id="email-field" name="fromEmail" placeholder="Email" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}">
+            <ul class="errors"><li id="email-error">Your email cannot be blank</li></ul>
+            {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPhone" class="col-xs-12 col-sm-3 form-control-label">Phone</label>
+          <div class="col-xs-12 col-sm-9">
+            <input type="phone" class="form-control" id="inputPhone" name="message[Phone]" placeholder="Phone">
+          </div>
+        </div>
+
+        <h4>Address</h4>
+        <div class="form-group row">
+          <label for="inputStreet1" class="col-xs-12 col-sm-3 form-control-label">Street Address<sup>*</sup></label>
+          <div class="col-xs-12 col-sm-9">
+            <input type="text" class="form-control" id="street-address1" name="message[Street]" placeholder="Street Address">
+            <ul class="errors"><li id="street-error">Street address cannot be blank</li></ul>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputStreet2" class="col-xs-12 col-sm-3 form-control-label">Apt, Suite, etc.</label>
+          <div class="col-xs-12 col-sm-9">
+            <input type="text" class="form-control" id="street-address2" name="message[Street2]" placeholder="Apt, Suite (Optional)">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputCity" class="col-xs-12 col-sm-3 form-control-label">City<sup>*</sup></label>
+          <div class="col-xs-12 col-sm-9">
+            <input type="text" class="form-control" id="city-field" name="message[City]" placeholder="City">
+            <ul class="errors"><li id="city-error">City cannot be blank</li></ul>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputState" class="col-xs-12 col-sm-3 form-control-label">State/Province<sup>*</sup></label>
+          <div class="col-xs-12 col-sm-3">
+            <input type="text" class="form-control" id="state-field" name="message[State]" placeholder="State">
+            <ul class="errors"><li id="state-error">State/Province cannot be blank</li></ul>
+          </div>
+          <label for="inputPostalCode" class="col-xs-12 col-sm-3 form-control-label">Postal Code<sup>*</sup></label>
+          <div class="col-xs-12 col-sm-3">
+            <input type="text" class="form-control" id="zip-field" name="message[PostalCode]" placeholder="PostalCode">
+            <ul class="errors"><li id="zip-error">Postal code cannot be blank</li></ul>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="input-countries" class="col-xs-12 col-sm-3 form-control-label">Country</label>
+          {% include 'partials/_countries_list' %}
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3">I plan to visit</label>
+          <div class="col-sm-9">
+            <div class="radio">
+              <label>
+                <input type="radio" name="message[WhenVisiting]" id="gridRadios1" value="Within 3 months" checked>
+                Within 3 months
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="message[WhenVisiting]" id="gridRadios2" value="Between 3 and 6 months">
+                Between 3 and 6 months from now
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="message[WhenVisiting]" id="gridRadios3" value="Between 6 and 9 months">
+                Between 6 and 9 months from now
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="message[WhenVisiting]" id="gridRadios4" value="A year or more away">
+                A year or more away
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <fieldset class="form-group">
+          <div class="col-sm-offset-3">
+            <label for="comment-field">Please enter comments or suggestions below.</label>
+            <textarea class="form-control" id="comment-field" name="message[body]" rows="3">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
+            {{ message is defined and message ? errorList(message.getErrors('message')) }}
+          </div>
+        </fieldset>
+
+        <div class="form-group row">
+          <div class="col-sm-offset-3 col-sm-10">
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+          </div>
+        </div>
+      </form>
+
+  {% endif %}
+    </div>
+  <div class="col-xs-12 col-md-6">
+    <div class="guide">
+    </div>
+  </div>
+</div>

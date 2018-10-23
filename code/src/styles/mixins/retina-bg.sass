@@ -1,0 +1,7 @@
+@mixin retina-bg($filename, $ext, $w, $h, $path: '../imgs')
+  background-image: url("#{$path}/#{$filename}.#{$ext}")
+  background-size: $w $h
+
+  @media  only screen and (min-device-pixel-ratio: 1.5), only screen and (min-resolution: 192dpi)
+    $retina_designator: '@2x'
+    background-image: url("#{$path}/#{$filename}#{$retina_designator}.#{$ext}")

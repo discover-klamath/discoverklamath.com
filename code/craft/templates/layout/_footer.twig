@@ -1,0 +1,16 @@
+{% cache globally %}
+
+<footer id="footer"{% if type is defined %} class="{{ type }}"{% endif %}>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                {% include 'partials/footer_nav' %}
+                {% include 'partials/supp_nav' with {supp_class: 'dark', newsletter_signup: false} %}
+                <p class="sm">Copyright {{ now.year }} Meet Me In Klamath, the
+                    Official Tourism Agency for Klamath County, Oregon.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% endcache %}

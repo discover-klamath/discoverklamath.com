@@ -1,0 +1,145 @@
+.row.image-grid
+  padding-top: 1em
+
+.grid-item
+  margin-bottom: 15px
+  padding-bottom: 90%
+  position: relative
+
+  a.image-grid-link
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: cover
+    background-color: transparent
+    border: none
+    height: 100%
+    position: absolute
+    top: 0
+    width: 92%
+
+    h3.adj
+      background: $blue
+      bottom: 0
+      color: $white
+      font-size: 22px
+      left: 0
+      margin: 0
+      padding: .4em .6em
+      position: absolute
+      right: 0
+
+  &.enhanced
+    padding-bottom: 1em
+
+    a.image-grid-link
+      height: 0
+      padding-top: 100%
+      // margin: 0
+
+      & + *
+        display: block
+        margin-top: 30px
+        padding-top: 100%
+
+    h4, h4.no-link
+      margin-top: .7em
+      margin-bottom: 0
+
+    p
+      margin: .9em 0 0 0
+
+    .copy-block
+      padding-bottom: .2em
+
+      p
+        line-height: 1.4
+
+    p.address
+      font-weight: bold
+      line-height: 1.2
+      margin-top: .6em
+
+      a.phone
+        display: block
+
+    p.hours
+      font-weight: bold
+      line-height: 1.1
+
+
+// @media (min-width: 26em)            // CUSTOM BREAKPOINT
+  // body
+    // display: none
+
+// @include media-breakpoint-up(sm)
+  // body
+    // display: none
+
+@media (min-width: 34em)            // CUSTOM BREAKPOINT
+  // body
+    // display: none
+  .grid-item
+    padding-bottom: 40%
+
+    a.image-grid-link
+      max-height: 270px
+
+    &.col-md-4
+      a.image-grid-link
+        max-height: 290px
+
+
+@include media-breakpoint-up(md)
+  // body
+    // display: none
+  .grid-item
+    margin-bottom: 1.6em
+    padding-bottom: 34%
+
+    a.image-grid-link
+      max-height: 320px
+
+    &.enhanced
+      .copy-block
+        padding-bottom: .2em
+
+        p
+          // font-size: 1.2em
+          line-height: 1.4
+
+@media (min-width: 62em)            // CUSTOM BREAKPOINT
+  // body
+    // display: none
+  .grid-item.adj
+    margin-bottom: 1.6em
+
+    &.enhanced
+      .copy-block
+        p
+          line-height: 1.4
+
+
+@include media-breakpoint-up(lg)
+  // body
+    // display: none
+  .grid-item
+    a.image-grid-link.responsive
+      max-height: 460px
+
+
+@include media-breakpoint-up(xl)
+  // body
+    // display: none
+  .grid-item.adj
+    a.image-grid-link.responsive
+      max-height: 560px
+
+
+.firefox-edge
+  .row.image-grid
+    .grid-item
+      a.image-grid-link
+        padding-top: 100%
+
+      .grid-name-link, .grid-name-item
+        margin-top: 2em

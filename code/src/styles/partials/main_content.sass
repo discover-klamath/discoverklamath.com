@@ -1,0 +1,157 @@
+#content
+
+  .mt-5
+    margin-top: 3rem
+
+  .p-0
+    padding: 0
+    
+  .m-0
+    margin: 0
+
+  .mb-3
+    margin-bottom: 1rem
+
+  .container-fluid:first-child
+    @include retina-bg('eagle_sm', 'png', 250px, 120px)
+    background-repeat: no-repeat
+    background-position: bottom center
+    min-height: 900px
+    margin-bottom: 1em
+    padding-bottom: 130px
+
+  a, a:visited
+    color: $blue
+
+  a:hover, a:active
+    color: $red
+    text-decoration: underline
+
+  .sidebar
+    padding-top: 1em
+
+    @include media-breakpoint-up(md)
+      margin-top: 1em
+      padding-top: 6.5em
+
+  .mb-3
+    margin-bottom: 1rem !important
+
+  .p-0
+    padding-left: 0 !important
+  @include media-breakpoint-up(md)
+    .pl-md-3
+      padding-left: 1rem !important
+    .pr-md-3
+      padding-right: 1rem !important
+
+  .flex-video
+    position: relative
+    padding-top: 25px
+    padding-bottom: 67.5%
+    height: 0
+    margin-bottom: 16px
+    overflow: hidden
+
+  .flex-video.widescreen
+    padding-bottom: 51%
+
+  .flex-video.vimeo
+    padding-top: 0
+
+  .flex-video iframe
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+
+  @include media-breakpoint-up(sm)
+    .flex-video.widescreen
+      padding-bottom: 53%
+
+  // @include media-breakpoint-up(md)
+
+  @include media-breakpoint-up(lg)
+    .flex-video.widescreen
+      margin-right: -10px
+      padding-bottom: 54.25%
+
+  @include media-breakpoint-up(xl)
+    .flex-video.widescreen
+      padding-bottom: 54.6%
+
+
+.ta-right
+  text-align: right
+
+.ta-center
+  text-align: center
+
+body.order-guide
+  .guide
+    @include retina-bg('visitor_guide_web', 'jpg', 400px, 520px)
+    background-size: contain
+    background-repeat: no-repeat
+    background-position: 50%
+    height: 520px
+    margin: 2em auto
+    width: 100%
+
+  label
+    padding-left: 15px
+
+
+  #input-countries
+    margin-left: 1em
+
+  .btn.btn-primary
+    color: $lt-cream
+    background: $blue
+    border: none
+
+    &:hover
+      background-color: $red
+
+  .errors
+    list-style: none
+    margin-bottom: 0
+    margin-left: 1em
+    padding-left: 0
+    color: $red
+
+    li
+      padding-top: .5em
+
+    li#name-error, li#email-error, li#street-error, li#city-error, li#state-error, li#zip-error
+      display: none
+
+      &.vis
+        display: block
+
+  .guide-thank-you
+    color: $blue
+    line-height: 1.4
+
+  .owl
+    @include retina-bg('critters', 'png', 191px, 2052px)
+    background-repeat: no-repeat
+    background-position: 0 -810px
+    height: 200px
+    margin: 30px auto 0 auto
+    width: 191px
+
+  @include media-breakpoint-up(md)
+    .guide-thank-you
+      text-align: center
+      margin: 2em auto 0 auto
+
+    .owl
+      margin-top: 50px
+
+
+
+.w-100
+  width: 100%
+  @include media-breakpoint-up(md)
+    width: auto

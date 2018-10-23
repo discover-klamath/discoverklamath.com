@@ -1,0 +1,53 @@
+{% set ads = entry.advertisements.advertisementBlock %}
+{% set vertical = false %}
+{% set initSignup = false %}
+{% set initHoriz = false %}
+{% for adBlock in ads %}
+  {% set adEntry = adBlock.adEntryField.first %}
+  {% if (type == "vertical" and adBlock.layoutType == "vertical") %}
+    {% set vertical = true %}
+
+    {% if initSignup == false %}
+      {# {% include 'partials/jack_rabbit.twig' %} #}
+      {% if craft.request.getSegment(1) == 'passport' %}
+        {% include 'passport/downloads.twig' with { 'entry': entry} %}
+      {% endif %}
+      {% set initSignup = true %}
+    {% endif %}
+
+    {% if adEntry is not empty and adEntry.adImage is not empty %}
+      <a class="banner vert ad" href="{{ adEntry.adLinkUrl }}">
+        <img src="{{ adEntry.adImage.first.url }}" data-slug="{{ adEntry.slug }}">
+      </a>
+    {% endif %}
+
+  {% elseif (type == "horizontal" and adBlock.layoutType matches '/^horizontal/') %}
+  {% if initHoriz == false %}
+    <div class="col-xs-12 col-md-9">
+      <div class="row">
+      {% set initHoriz = true %}
+  {% endif %}
+      {% if adBlock.layoutType == "horizontal100" %}
+        <div class="col-xs-12">
+      {% elseif adBlock.layoutType == "horizontal50" %}
+        <div class="col-xs-6">
+      {% elseif adBlock.layoutType == "horizontal25" %}
+        <div class="col-xs-6 col-md-3">
+      {% endif %}
+        {% if adEntry is defined and adEntry.adLinkUrl is defined and adEntry.adImage is defined %}
+          <a class="banner horiz ad" href="{{adEntry.adLinkUrl}}">
+            <img src="{{ adEntry.adImage.first.url }}" data-slug="{{ adEntry.slug }}">
+          </a>
+        {% endif %}
+        </div>
+    {% if nextBlock is defined %}
+      </div>
+    </div>
+    {% endif %}
+  {% endif %}
+
+{% endfor %}
+
+{% if (type == "vertical" and vertical == false) %}
+  {# {% include 'partials/jack_rabbit.twig' %} #}
+{% endif %}

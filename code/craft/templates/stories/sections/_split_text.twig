@@ -1,0 +1,19 @@
+{% macro position(pos) %}
+    {% switch pos %}{% case 'left' %}float-left{% case 'center' %}m-auto{% case 'right' %}float-right{% endswitch %}
+{% endmacro %}
+
+{% macro textPosition(pos) %}
+    {% switch pos %}{% case 'left' %}text-left{% case 'center' %}text-center{% case 'right' %}text-right{% endswitch %}
+{% endmacro %}
+
+<section class="split-text-section container mb-5 clearfix">
+    <p>
+        <div class="{{ _self.position(block.position) }}">
+            <img src="{{ block.image.first.getUrl() }}" />
+            {% if block.caption | length %}
+                <p class="caption {{ _self.textPosition(block.position) }}">{{ block.caption }}</p>
+            {% endif %}
+        </div>
+        {{ block.text }}
+    </p>
+</section>

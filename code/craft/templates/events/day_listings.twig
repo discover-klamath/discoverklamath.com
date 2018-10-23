@@ -1,0 +1,37 @@
+{% extends "_layout" %}
+
+{% set pageEntry = craft.entries.section('pages').slug('event-calendar') %}
+{% set nextDay = day + 1 %}
+{% set entries = craft.venti.allEvents().startDate('and', '>= ' ~ y ~ '-' ~ m ~ '-' ~ day, '< ' ~ y ~ '-' ~ m ~ '-' ~ nextDay).find() %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12 col-md-9 copy-block">
+
+
+            {% for entry in entries %}
+
+                {% if entry.allDay %}
+                    {% set startDate = entry.startDate|date('F d, Y') %}
+                {% else %}
+                    {% set startDate = (entry.startDate|date('F d, Y g:ia\\–') ~ entry.endDate|date('g:ia')) %}
+                {% endif %}
+
+                <h2>
+                    <a href="/things-to-do/event-calendar/event/{{ entry.slug }}">{{ entry.title }}</a>
+                </h2>
+
+                <p class="start-date">{{ startDate }}</p>
+
+                {{ entry.body }}
+
+            {% endfor %}
+
+        </div>
+        <div class="col-xs-12 col-md-3 sidebar">
+            {% include 'partials/advertisements' with {'type': 'vertical', 'entry': pageEntry} %}
+        </div>
+    </div>
+
+{% endblock %}

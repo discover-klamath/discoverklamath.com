@@ -1,0 +1,43 @@
+{% extends (craft.request.isAjax and not craft.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
+{% block content %}
+
+    {% cache %}
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+
+                    {% include 'partials/marquee' with {'type': 'home'} %}
+
+                    {% include 'partials/jack_rabbit.twig' with {'isHomepage': true} %}
+
+                    </script>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-9 copy-block">
+                            <h2>{{ entry.title }}</h2>
+
+                            {{ entry.body }}
+
+                            {% include 'partials/image_grid' %}
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 sidebar">
+                            {% include 'partials/advertisements' with {'type': 'vertical'} %}
+                        </div>
+
+                    </div>
+
+
+                    {% if entry.advertisements|length %}
+                        <div class="row">
+                            {% include 'partials/advertisements' with {'type': 'horizontal'} %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    {% endcache %}
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% set catSlug = craft.request.getSegment(2) %}
+
+{% set entries = craft.entries.section('dining').order('title').limit(12) %}
+
+{% if catSlug %}
+    {% set cat = craft.categories.group('diningCategory').slug(catSlug) %}
+    {% set entries = craft.entries.section('dining').order('title').relatedTo(cat).limit(12) %}
+{% endif %}
+
+{% paginate entries as pageInfo, pageEntries %}
+
+{% macro listing(entry) %}
+    <div class="col-xs-12 col-md-3 copy-block">
+        <h4><a href="{{ entry.website }}">{{ entry.title }}</a></h4>
+
+            <p class="address">
+                {{ entry.address }}
+            </p>
+
+            <p class="phone">
+                <span>{{ entry.phone }}</span>
+            </p>
+
+    </div>
+{% endmacro %}
+
+{% macro select(entry) %}
+    <div class="col-xs-12 col-md-3 copy-block">
+        <h4><a href="{{ entry.website }}">{{ entry.title }}</a></h2>
+
+            <p class="address">
+                {{ entry.address }}
+            </p>
+
+            <p class="phone">
+                <span>{{ entry.phone }}</span>
+            </p>
+
+    </div>
+{% endmacro %}
+
+{% block content %}
+    <div class="row">
+        {% for entry in pageEntries %}
+            {{ _self.listing(entry) }}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+<div class="page-nav" id="main">
+    {% if pageInfo.prevUrl %}
+        <a href="{{ pageInfo.prevUrl }}" class="btn btn-primary arrow prev">
+            <span>‹</span>Previous</a>
+    {% endif %}
+    {% if pageInfo.nextUrl %}
+        <a href="{{ pageInfo.nextUrl }}" class="btn btn-primary arrow next">
+            Next<span>›</span>
+        </a>
+    {% endif %}
+</div>

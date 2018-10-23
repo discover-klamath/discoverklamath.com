@@ -1,0 +1,44 @@
+{% macro alignment(alignment) %}
+    {{ alignment == 'right' ? 'pull-xs-right p-0 pl-md-3 w-100 w-100 mb-3' : 'pull-xs-left p-0 pr-md-3 w-100 mb-3' }}
+{% endmacro %}
+
+{% macro linkTo(externalLink, entryLink, assetLink) %}
+    {% if externalLink %}
+        {{ externalLink }}
+    {% elseif entryLink and entryLink | length %}
+        {{ entryLink.first ? entryLink.first.url : '#' }}
+    {% elseif assetLink and assetLink | length %}
+        {{ assetLink.first ? assetLink.first.url : '#' }}
+    {% else %}
+        #
+    {% endif %}
+{% endmacro %}
+
+{% macro linkToTarget(externalLink, assetLink) %}
+    {% if externalLink %}
+        target="_blank"
+    {% elseif assetLink and assetLink | length %}
+        target="_blank"
+    {% endif %}
+{% endmacro %}
+
+<div class="row">
+    {% set contentList = entry.contentList %}
+
+    {% for row in contentList %}
+        <a href="{{ _self.linkTo(row.externalLink, row.entryLink, row.assetLink) }}"
+           {{ _self.linkTo(row.externalLink, row.assetLink) }} class="col-xs-12 col-md-6"
+           style="min-height: 200px; overflow: hidden; margin-bottom: 1rem;">
+            {% if row.blockImage and row.blockImage.first %}
+                <img src="{{ row.blockImage.first.getUrl('contentList') }}"
+                     class="{{ _self.alignment(row.alignment) }}"/>
+            {% endif %}
+            <div class="p-xs-3">
+                <h3 style="margin-top: 0;text-decoration: none;">{{ row.blockTitle }}</h3>
+                <p style="text-decoration: none;">{{ row.blockDescription }}</p>
+            </div>
+
+        </a>
+    {% endfor %}
+
+</div>

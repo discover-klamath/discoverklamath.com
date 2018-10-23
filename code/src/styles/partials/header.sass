@@ -1,0 +1,17 @@
+h1.logo
+  margin-bottom: 0
+
+  a
+    @include retina-bg('klamath_logo', 'png', 160px, 148px)
+    background-repeat: no-repeat
+    display: block
+    margin: .1em 0 0 .1em
+    overflow: hidden
+    height: 0
+    padding-top: 110px
+    width: 220px
+
+    @include media-breakpoint-up(md)
+      &
+        @include retina-bg('klamath_logo', 'png', 220px, 204px)
+        padding-top: 160px

@@ -1,0 +1,28 @@
+{% set category = craft.categories.group('navigationTypes').title('Special').first() %}
+{% set pages = craft.entries.section('pages').relatedTo(category) %}
+<nav>
+    <ul class="supplemental-nav" class="hidden-sm-down">
+        {% nav page in pages %}
+            <li class="klam-btn {{ supp_class }}">
+                {{ page.getLink() }}
+            </li>
+        {% endnav %}
+        <li><a class="social fb {{ supp_class }}"
+               href="https://www.facebook.com/MeetMeInKlamath/" target="_blank">Facebook</a>
+        </li>
+        <li><a class="social pi {{ supp_class }}"
+               href="https://www.pinterest.com/discoverklamath/" target="_blank">Pinterest</a>
+        </li>
+        <li><a class="social in {{ supp_class }}"
+               href="https://www.instagram.com/meet_me_in_klamath/"
+               target="_blank">Instagram</a></li>
+        <li><a class="social yt {{ supp_class }}"
+               href="https://www.youtube.com/user/DiscoverKlamathVCB?feature=watch"
+               target="_blank">YouTube</a></li>
+        <li><a class="social tw {{ supp_class }}"
+               href="https://twitter.com/meetmeinklamath" target="_blank">Twitter</a>
+        </li>
+
+        <h2 class="hashtag-footer">#meetmeinklamath</h2>
+    </ul>
+</nav>

@@ -1,0 +1,25 @@
+{% set tabs = entry.tabbedLists %}
+{% set tabCount = tabs|length %}
+{% if tabCount %}
+    <div class="row">
+        <div class="col-xs-12 col-md-9 tab-list heading-count-{{ tabCount }}">
+            {% for tab in tabs %}
+                {% set assets = tab.assetLink %}
+                <div class="tab-heading index-{{ loop.index }}{% if loop.index == 1 %} active{% endif %}">
+                    {{ tab.tabName }}
+                </div>
+                <div class="tab-copy index-{{ loop.index }}{% if loop.index == 1 %} vis{% endif %}">
+                    {{ tab.copy }}
+                    <ul class="list-{{ loop.index }}">
+                        {% for asset in assets %}
+                            <li><a href="{{ asset.url }}"
+                                   target="_blank">{{ asset.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <div class="tab-image">{% if tab.tabImage.first is not empty %}{{ tab.tabImage.first.url }}{% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

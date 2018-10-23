@@ -1,0 +1,81 @@
+nav
+  ul.supplemental-nav
+    li
+      a
+        &.social
+          @include svg-bg('social')
+          background-size: 130px 104px
+          background-position: 0 0
+          width: 26px
+          height: 0
+          margin: 0 .25em
+          padding-top: 26px
+          overflow: hidden
+
+          &.fb
+            background-position: -26px 0
+
+            &:hover
+              background-position: -26px -78px // red
+
+          &.pi
+            background-position: -78px 0
+
+            &:hover
+              background-position: -78px -78px
+
+          &.in
+            background-position: -52px 0
+
+            &:hover
+              background-position: -52px -78px
+
+          &.yt
+            background-position: -104px 0
+
+            &:hover
+              background-position: -104px -78px
+
+          &.tw
+            background-position: 0 0
+
+            &:hover
+              background-position: 0 -78px
+
+
+          &.dark
+            &.fb
+              background-position: -26px -52px
+
+              &:hover
+                background-position: -26px -78px // red
+                // background-position: -26px 0 // blue
+
+            &.pi
+              background-position: -78px -52px
+
+              &:hover
+                background-position: -78px -78px // red
+                // background-position: -78px 0 // blue
+
+            &.in
+              background-position: -52px -52px
+
+              &:hover
+                background-position: -52px -78px // red
+                // background-position: -52px 0 // blue
+
+            &.yt
+              background-position: -104px -52px
+
+              &:hover
+                background-position: -104px -78px // red
+                // background-position: -104px 0 // blue
+
+            &.tw
+              background-position: 0 -52px
+
+              &:hover
+                background-position: 0 -78px // red
+                // background-position: 0 0 // blue
+

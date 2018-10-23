@@ -1,0 +1,26 @@
+.klam-btn
+  a
+    @extend %telefon
+    background-color: $blue
+    border-radius: 3px
+    color: $lt-cream
+    display: inline-block
+    font-size: 13px
+    height: 34px
+    letter-spacing: 1px
+    line-height: 1.6
+    margin: 0
+    padding: 0 .6em
+    text-transform: none
+
+    &:hover
+      background-color: $red
+      color: $lt-cream
+
+  &.dark
+    a
+      color: $blue
+      background-color: $lt-cream
+
+      &:hover
+        background-color: $red

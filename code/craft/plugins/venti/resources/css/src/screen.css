@@ -1,0 +1,146 @@
+/**
+ * Venti Input
+ */
+.evrp_field > span {
+  padding-right: 10px; }
+
+.rrule_human_text {
+  display: inline-block;
+  padding-left: 10px;
+  font-weight: bold; }
+
+/**
+ * Modal
+ */
+.evrp_overlay {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 80 !important;
+  text-align: center; }
+
+.evrp_modal {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -190px;
+  margin-top: -185px;
+  width: 440px;
+  text-align: center;
+  border: 1px solid #e1e1e1;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 5px #dddddd;
+  -moz-box-shadow: 0px 0px 5px #dddddd;
+  -ie-box-shadow: 0px 0px 5px #dddddd;
+  box-shadow: 0px 0px 5px #dddddd; }
+  .evrp_modal h3 {
+    margin: 0px;
+    padding: 15px 20px 10px 20px;
+    text-align: left;
+    font-size: 14px;
+    color: #444444; }
+  .evrp_modal table {
+    display: inline-block;
+    width: 340px; }
+    .evrp_modal table th {
+      width: 100px;
+      padding-right: 10px;
+      padding-bottom: 15px;
+      color: #333333;
+      font-weight: 600;
+      text-align: right; }
+    .evrp_modal table td {
+      padding-bottom: 15px; }
+  .evrp_modal table,
+  .evrp_modal select {
+    font-size: 13px; }
+  .evrp_modal .evrp_summary {
+    font-weight: bold; }
+  .evrp_modal .evrp_ends > span {
+    display: block;
+    padding-bottom: 5px; }
+    .evrp_modal .evrp_ends > span input {
+      margin-right: 3px; }
+  .evrp_modal .field {
+    display: inline-block; }
+  .evrp_modal .sep {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e1e1e1; }
+  .evrp_modal .elements {
+    min-height: 84px;
+    padding: 5px;
+    border: 1px dashed rgba(0, 0, 0, 0.2) !important; }
+  .evrp_modal .text--left {
+    text-align: left; }
+  .evrp_modal #modtab2,
+  .evrp_modal #modtab3 {
+    display: none; }
+  .evrp_modal .venti_adddate {
+    color: #aaaaaa;
+    transition: color .3s ease-out; }
+  .evrp_modal .venti_adddate.ready {
+    color: #111111;
+    transition: color .3s ease-out; }
+  .evrp_modal .btns {
+    width: 100%;
+    padding-left: 24px; }
+
+.evrp_field.allDay .timewrapper:before {
+  position: absolute !important;
+  z-index: 50;
+  width: 100%;
+  height: 30px;
+  background-color: white;
+  left: 0px;
+  top: 0px;
+  content: ''; }
+
+/**
+ * Modal States
+ */
+[data-state='1'] .venti-dayofweek--group,
+[data-state='1'] .venti-repeatby--group,
+[data-state='1'] [class*='venti-select--label']:not(.venti-select--label_days) {
+  display: none !important; }
+[data-state='1'] .venti-repeatevery--select {
+  display: table-row !important; }
+
+[data-state='2'] .venti-dayofweek--group,
+[data-state='2'] .venti-repeatby--group,
+[data-state='2'] .venti-repeatevery--select {
+  display: none !important; }
+
+[data-state='3'] .venti-dayofweek--group,
+[data-state='3'] .venti-repeatby--group,
+[data-state='3'] .venti-repeatevery--select {
+  display: none !important; }
+
+[data-state='4'] .venti-dayofweek--group,
+[data-state='4'] .venti-repeatby--group,
+[data-state='4'] .venti-repeatevery--select {
+  display: none !important; }
+
+[data-state='5'] .venti-dayofweek--group,
+[data-state='5'] .venti-repeatevery--select {
+  display: table-row !important; }
+[data-state='5'] [class*='venti-select--label']:not(.venti-select--label_weeks),
+[data-state='5'] .venti-repeatby--group {
+  display: none !important; }
+
+[data-state='6'] .venti-repeatevery--select,
+[data-state='6'] .venti-repeatby--group {
+  display: table-row !important; }
+[data-state='6'] [class*='venti-select--label']:not(.venti-select--label_months),
+[data-state='6'] .venti-dayofweek--group {
+  display: none !important; }
+
+[data-state='7'] .venti-dayofweek--group,
+[data-state='7'] .venti-repeatby--group,
+[data-state='7'] [class*='venti-select--label']:not(.venti-select--label_years) {
+  display: none !important; }
+[data-state='7'] .venti-repeatevery--select {
+  display: table-row !important; }

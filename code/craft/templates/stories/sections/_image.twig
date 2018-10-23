@@ -1,0 +1,22 @@
+{% macro position(pos) %}{% switch pos %}{% case 'left' %}float-left{% case 'center' %}m-auto{% case 'right' %}float-right{% endswitch %}{% endmacro %}
+
+{% macro textPosition(pos) %}{% switch pos %}{% case 'left' %}text-left{% case 'center' %}text-center{% case 'right' %}text-right{% endswitch %}{% endmacro %}
+
+<section class="image-section container mb-5">
+    <div class="w-100 {{ _self.position(block.position) }}">
+
+        {% if block.externalLink | length %}
+            <a target="_blank" href="{{ block.externalLink }}">
+        {% endif %}
+
+        <img class="{{ block.position == 'center' ? 'm-auto d-block' : '' }}" src="{{ block.image.first.getUrl() }}"/>
+
+        {% if block.caption | length %}
+            <p class="caption {{ _self.textPosition(block.position) }}">{{ block.caption }}</p>
+        {% endif %}
+
+        {% if block.externalLink  | length %}
+            </a>
+        {% endif %}
+    </div>
+</section>

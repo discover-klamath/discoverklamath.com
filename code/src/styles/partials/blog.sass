@@ -1,0 +1,36 @@
+.travel-blog
+  #content 
+    .container
+      margin-top: 20px
+      .blog-item
+        margin-bottom: 0
+        &:hover 
+          background: lighten(#ecdfd1, 85%)
+
+        > div 
+          display: flex
+          align-items: center
+          justify-content: center
+
+          .blog-image
+            height: 200px
+            width: 200px
+            background-size: cover
+            background-position: center center
+            display: inline
+            margin: 16px 20px
+          .rest
+            flex: 1
+            .read-more
+              color: black
+
+      &:hover
+        text-decoration: none !important
+
+.travel-blog #content a:hover
+  text-decoration: none
+  color: initial
+
+.blog-title 
+  margin-top: 3rem;
+  margin-bottom: 3rem;

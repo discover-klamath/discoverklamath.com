@@ -1,0 +1,17 @@
+<p>{{ entry.anthemCopy }}</p>
+<h3>{{ entry.subtitle }}</h3>
+<p>{{ entry.contestDescription }}</p>
+<h3 style="color:#5e6a08">{{ entry.prizeTitle }}</h3>
+<p>{{ entry.prizeDescription }}</p>
+<div class="row">
+    {% for block in entry.imageBlocks %}
+        {% set image = block.image.first() %}
+        <div class="col-xs-12 col-sm-4">
+            <p style="text-align:center">{{ block.fact }}</p>
+            <img style="width:100%" src="{{ image.getUrl() }}">
+        </div>
+    {% endfor %}
+</div>
+
+{% set form = craft.formerly.form('passport') %}
+{% include 'passport/form.twig' with { form: form } %}

@@ -1,0 +1,42 @@
+{% if entry.marquee | length %}
+
+{% set associatedMarquee = entry.marquee %}
+{% set marqueeImages = associatedMarquee.first.marqueeImages %}
+
+<div class="row">
+    <div class="col-md-12">
+    <div class="marquee {{ type }}" data-slick='{"slidesToShow": 1, "slidesToScroll": 1}'>
+        {% if marqueeImages | length > 1 %}
+
+        {% for marquee in marqueeImages %}
+            {% set image = marquee.image.first() %}
+            {% if marquee.youtubeId is not empty %}
+                <div class="video-wrap" data-bg-url="{{ image.getUrl() }}"
+                    style="background-image: url('{{ image.getUrl() }}');">
+                <iframe class="marquee-player" data-youtube-id="{{ marquee.youtubeId }}"
+                        id="player-{{ loop.index }}" type="text/html"
+                        src="https://www.youtube.com/embed/{{ marquee.youtubeId }}?enablejsapi=1"
+                        frameborder="0" allowfullscreen></iframe>
+                <button class="play-btn"></button>
+                </div>
+            {% else %}
+                <div class="video-wrap" data-bg-url="{{ image.getUrl() }}"
+                    style="background-image: url('{{ image.getUrl() }}');">
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% else  %}
+            {% for marquee in marqueeImages %}
+                {% set image = marquee.image.first() %}
+                {% if marquee.youtubeId is empty %}
+                    <img src={{image.getUrl()}} />
+                {% endif %}
+            {% endfor %}
+
+        {% endif %}
+    </div>
+    </div>
+    <div id="marquee-captions"></div>
+</div>
+{% endif %}

@@ -1,0 +1,28 @@
+{#TODO: this serves content over http and we need it to be switched to https #}
+{# <script src="https://widgets.bookdirect.net/widgets/search_widget.js.php?id=1079"
+        type="text/javascript"></script> #}
+
+
+{% if isHomepage %}
+        <div id="widget-container-1483"></div>
+        <script type="text/javascript">
+        (function() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.async = 'true';
+        script.src = "https://admin.bookdirect.net/hs4/widgets/1483.js?widget_element=widget-container-1483";
+        document.body.appendChild(script);
+        })();
+        </script>
+{% else %}
+        <div id="widget-container-1484" class="row"></div>
+        <script type="text/javascript">
+        (function() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.async = 'true';
+        script.src = "https://admin.bookdirect.net/hs4/widgets/1484.js?widget_element=widget-container-1484";
+        document.body.appendChild(script);
+        })();
+        </script>
+{% endif %}

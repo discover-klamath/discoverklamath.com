@@ -1,0 +1,51 @@
+{% cache globally %}
+
+{% set category = craft.categories.group('navigationTypes').title('Main').first() %}
+{% set pages = craft.entries.section('pages').relatedTo(category) %}
+<nav>
+    <div id="burger" class="hidden-md-up"></div>
+    <div id="mobile-nav-wrap">
+        <div class="inner-wrap">
+            <div id="burger-close"></div>
+            <div id="mobile-nav-close"></div>
+            <nav>
+                <ul id="main-nav">
+                    <li class="mini-home"><a href="{{ siteUrl }}">Home</a></li>
+                    {% nav page in pages %}
+                        <li class="{% if page.columns != 0 %}columns-{{ page.columns }} {% endif %}{{ page.slug }}">
+                            {% if page.parent %}
+                                {% if page.parent.parent %}
+                                    <a href="/{{ page.parent.parent.slug }}/{{ page.parent.slug }}/{{ page.slug }}">{{ page.title }}</a>
+                                {% else %}
+                                    <a href="/{{ page.parent.slug }}/{{ page.slug }}">{{ page.title }}</a>
+                                {% endif %}
+                            {% else %}
+                                {{ page.getLink() }}
+                            {% endif %}
+
+                            {% ifchildren %}
+                                <ul>
+                                    <div>
+                                        {% children %}
+                                    </div>
+                                </ul>
+                            {% endifchildren %}
+                        </li>
+                    {% endnav %}
+                </ul>
+                <div class="critter inverted">
+                    <div></div>
+                </div>
+                <div class="critter">
+                    <div></div>
+                </div>
+                <div class="critter">
+                    <div></div>
+                </div>
+                {% include 'partials/supp_nav' with {'supp_class': '', 'newsletter_signup': true} %}
+            </nav>
+        </div>
+    </div>
+</nav>
+
+{% endcache %}

@@ -1,0 +1,54 @@
+{% extends '_layouts/cp' %}
+{% set title = 'Export'|t %}
+
+{% set tabs = {
+	submissions: { label: "Submissions"|t, url: url('formerly') },
+	forms:       { label: "Forms"|t, url: url('formerly/forms') },
+	export:      { label: 'Export'|t, url: url('formerly/export') }
+} %}
+
+{% import '_includes/forms' as cforms %}
+
+{% set selectedTab = 'export' %}
+
+{% set content %}
+	{% if forms | length %}
+		<form action="{{ url('formerly/export/csv') }}" method="post" target="_blank">
+			<div class="field">
+				<div class="heading">
+					<label for="form">Form</label>
+					<div class="instructions">
+						<p>Select the form whose data you want to export</p>
+					</div>
+				</div>
+				<div class="select">
+					<select name="form">
+						{% for form in forms %}
+							<option value="{{ form.id }}">{{ form.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				{{ cforms.dateField({
+					label: 'Export listings from'|t,
+					id: "fromDate",
+					name: "fromDate",
+				}) }}
+
+
+				{{ cforms.dateField({
+					label: 'Export listings up to'|t,
+					id: "toDate",
+					name: "toDate",
+				}) }}
+
+			</div>
+
+			<div class="button last">
+				<input type="submit" class="btn submit" value="Export CSV" />
+			</div>
+		</form>
+	{% else %}
+		<p>There are no forms.</p>
+	{% endif %}
+{% endset %}

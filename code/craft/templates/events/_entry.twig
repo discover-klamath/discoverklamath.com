@@ -1,0 +1,40 @@
+{% extends (craft.request.isAjax and not craft.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
+{% set pageEntry = craft.entries.section('pages').slug('event-calendar') %}
+{% set entry = craft.venti.allEvents('events').slug(slug).first() %}
+
+{% if entry.allDay %}
+    {% set startDate = entry.startDate|date('F d, Y') %}
+{% else %}
+    {% set startDate = (entry.startDate|date('F d, Y g:ia\\–') ~ entry.endDate|date('g:ia')) %}
+{% endif %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-9 copy-block">
+                <h2><a href="{{ entry.venueWebsite }}" style="color:#5e6a08;" target="_blank">{{ entry.title }}</a></h2>
+                <p class="start-date">{{ startDate }}</p>
+                {% if entry.venueWebsite is not empty %}
+                    <h4>{{ entry.venue }}</h4>
+                {% else %}
+                    <h4>{{ entry.venue }}</h4>
+                {% endif %}
+                {{ entry.eventAddress }}
+                <p class="phone">{{ entry.eventPhone }}</p>
+                {{ entry.body }}
+                {% include 'partials/image_grid' %}
+                <a href="/things-to-do/event-calendar">Back to event calendar</a>
+            </div>
+            <div class="col-xs-12 col-md-3 sidebar">
+                {% include 'partials/advertisements' with {'type': 'vertical', 'entry': pageEntry} %}
+            </div>
+        </div>
+
+        {% if entry.advertisements|length %}
+            <div class="row">
+                {% include 'partials/advertisements' with {'type': 'horizontal'} %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
